@@ -1,0 +1,11 @@
+{
+  "openapi": "3.0.0",
+  "info": {"title": "Cridaa Booking API", "version": "1.0.0"},
+  "paths": {
+    "/api/health": {"get": {"summary": "Health", "responses": {"200": {"description": "OK"}}}},
+    "/api/auth/login": {"post": {"summary": "Login", "requestBody": {"required": true, "content": {"application/json": {"schema": {"type": "object", "properties": {"username": {"type": "string"}, "password": {"type": "string"}}, "required": ["username", "password"]}}}}, "responses": {"200": {"description": "Token"}, "401": {"description": "Invalid"}}}},
+    "/api/slots": {"get": {"summary": "Available slots", "responses": {"200": {"description": "List"}}}},
+    "/api/slots/{id}/book": {"post": {"summary": "Book slot", "parameters": [{"in": "path", "name": "id", "required": true, "schema": {"type": "string"}}], "responses": {"200": {"description": "Booked"}, "401": {"description": "Unauthorized"}, "404": {"description": "Not found"}, "409": {"description": "Already booked"}}}},
+    "/api/slots/mine": {"get": {"summary": "My bookings", "responses": {"200": {"description": "List"}, "401": {"description": "Unauthorized"}}}}
+  }
+}

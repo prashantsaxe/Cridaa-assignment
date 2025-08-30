@@ -1,0 +1,17 @@
+{
+  "info": {
+    "name": "Cridaa Booking API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {"name": "Health", "request": {"method": "GET", "url": "{{baseUrl}}/api/health"}},
+    {"name": "Login", "request": {"method": "POST", "header": [{"key": "Content-Type", "value": "application/json"}], "body": {"mode": "raw", "raw": "{\n  \"username\": \"demo\",\n  \"password\": \"demo\"\n}"}, "url": "{{baseUrl}}/api/auth/login"}},
+    {"name": "Get Slots", "request": {"method": "GET", "url": "{{baseUrl}}/api/slots"}},
+    {"name": "Book Slot", "request": {"method": "POST", "header": [{"key": "Authorization", "value": "Bearer {{token}}"}], "url": "{{baseUrl}}/api/slots/:id/book"}},
+    {"name": "My Slots", "request": {"method": "GET", "header": [{"key": "Authorization", "value": "Bearer {{token}}"}], "url": "{{baseUrl}}/api/slots/mine"}}
+  ],
+  "variable": [
+    {"key": "baseUrl", "value": "http://localhost:4000"},
+    {"key": "token", "value": ""}
+  ]
+}

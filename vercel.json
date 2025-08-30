@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "builds": [
+    { "src": "client/vite.config.js", "use": "@vercel/static-build", "config": { } }
+  ],
+  "env": {
+  },
+  "buildCommand": "cd client && npm install && npm run build",
+  "outputDirectory": "client/dist"
+}

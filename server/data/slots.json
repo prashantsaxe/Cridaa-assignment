@@ -1,0 +1,77 @@
+[
+  {
+    "id": "94bb84c6-5488-4e2f-bf18-cede08860811",
+    "date": "2025-08-30",
+    "time": "06:00",
+    "court": "Court 1",
+    "booked": false
+  },
+  {
+    "id": "43f65933-1b97-4624-b618-f2e076b6061f",
+    "date": "2025-08-30",
+    "time": "07:00",
+    "court": "Court 1",
+    "booked": true,
+    "bookedBy": "1b8809ad-beeb-4426-a3bd-8c339e239fb4"
+  },
+  {
+    "id": "b1f7c9e9-f621-48d8-8d67-c9eca8ae08ee",
+    "date": "2025-08-30",
+    "time": "08:00",
+    "court": "Court 1",
+    "booked": false
+  },
+  {
+    "id": "27ddacc5-5301-4a5e-bdcf-db49b1ee39fd",
+    "date": "2025-08-30",
+    "time": "09:00",
+    "court": "Court 1",
+    "booked": true,
+    "bookedBy": "1b8809ad-beeb-4426-a3bd-8c339e239fb4"
+  },
+  {
+    "id": "49ea3930-a42d-40eb-b1cc-27460e2f779b",
+    "date": "2025-08-30",
+    "time": "10:00",
+    "court": "Court 1",
+    "booked": true,
+    "bookedBy": "1b8809ad-beeb-4426-a3bd-8c339e239fb4"
+  },
+  {
+    "id": "a9969127-cd2b-48c2-b0a3-715a52d1d6dc",
+    "date": "2025-08-30",
+    "time": "16:00",
+    "court": "Court 1",
+    "booked": false
+  },
+  {
+    "id": "8cfab06b-1bd2-469e-946c-cac548728166",
+    "date": "2025-08-30",
+    "time": "17:00",
+    "court": "Court 1",
+    "booked": true,
+    "bookedBy": "1b8809ad-beeb-4426-a3bd-8c339e239fb4"
+  },
+  {
+    "id": "d0dfec10-d55a-49e6-80f7-2bbd1e54e11c",
+    "date": "2025-08-30",
+    "time": "18:00",
+    "court": "Court 1",
+    "booked": false
+  },
+  {
+    "id": "e97b3126-719f-40f8-9b92-8abd9ff46dd5",
+    "date": "2025-08-30",
+    "time": "19:00",
+    "court": "Court 1",
+    "booked": true,
+    "bookedBy": "1b8809ad-beeb-4426-a3bd-8c339e239fb4"
+  },
+  {
+    "id": "646756ed-58c9-4549-9cc8-5c8411b0a24d",
+    "date": "2025-08-30",
+    "time": "20:00",
+    "court": "Court 1",
+    "booked": false
+  }
+]
