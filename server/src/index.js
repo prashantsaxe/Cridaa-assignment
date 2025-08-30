@@ -8,6 +8,7 @@ import dotenv from 'dotenv';
 import { v4 as uuid } from 'uuid';
 import swaggerUi from 'swagger-ui-express';
 import swaggerDoc from '../swagger.json' assert { type: 'json' };
+import bcrypt from 'bcryptjs';
 
 dotenv.config();
 const __filename = fileURLToPath(import.meta.url);
@@ -73,7 +74,8 @@ async function ensureSlots() {
 async function ensureUsers() {
   const users = await readJSON(USERS_FILE);
   if (users.length === 0) {
-    const defaultUser = { id: uuid(), username: 'demo', password: 'demo' }; // plain for simplicity
+    const hashedPassword = await bcrypt.hash('demo', 10);
+    const defaultUser = { id: uuid(), username: 'demo', password: hashedPassword, email: 'demo@example.com' };
     await writeJSON(USERS_FILE, [defaultUser]);
     return [defaultUser];
   }
@@ -83,6 +85,37 @@ async function ensureUsers() {
 app.get('/api/health', (_req, res) => res.json({ status: 'ok' }));
 
 app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerDoc));
+
+app.post('/api/auth/signup', async (req, res) => {
+  const { username, password, email } = req.body;
+  
+  if (!username || !password || !email) {
+    return res.status(400).json({ message: 'Username, password, and email are required' });
+  }
+  
+  const users = await ensureUsers();
+  
+  // Check if user already exists
+  if (users.find(u => u.username === username || u.email === email)) {
+    return res.status(409).json({ message: 'Username or email already exists' });
+  }
+  
+  // Hash password and create user
+  const hashedPassword = await bcrypt.hash(password, 10);
+  const newUser = { 
+    id: uuid(), 
+    username, 
+    password: hashedPassword, 
+    email,
+    createdAt: new Date().toISOString()
+  };
+  
+  users.push(newUser);
+  await writeJSON(USERS_FILE, users);
+  
+  const token = jwt.sign({ sub: newUser.id, username }, JWT_SECRET, { expiresIn: '8h' });
+  res.json({ token, user: { id: newUser.id, username, email } });
+});
 
 // Serve raw swagger spec
 app.get('/api/docs', async (_req, res) => {
@@ -99,10 +132,19 @@ app.get('/api/docs', async (_req, res) => {
 app.post('/api/auth/login', async (req, res) => {
   const { username, password } = req.body;
   const users = await ensureUsers();
-  const user = users.find(u => u.username === username && u.password === password);
-  if (!user) return res.status(401).json({ message: 'Invalid credentials' });
+  const user = users.find(u => u.username === username);
+  
+  if (!user) {
+    return res.status(401).json({ message: 'Invalid credentials' });
+  }
+  
+  const isValid = await bcrypt.compare(password, user.password);
+  if (!isValid) {
+    return res.status(401).json({ message: 'Invalid credentials' });
+  }
+  
   const token = jwt.sign({ sub: user.id, username }, JWT_SECRET, { expiresIn: '8h' });
-  res.json({ token });
+  res.json({ token, user: { id: user.id, username, email: user.email } });
 });
 
 app.get('/api/slots', async (req, res) => {
@@ -125,6 +167,21 @@ app.post('/api/slots/:id/book', authMiddleware, async (req, res) => {
 app.get('/api/slots/mine', authMiddleware, async (req, res) => {
   const slots = await ensureSlots();
   res.json(slots.filter(s => s.bookedBy === req.user.sub));
+});
+
+app.delete('/api/slots/:id/cancel', authMiddleware, async (req, res) => {
+  const { id } = req.params;
+  const slots = await ensureSlots();
+  const idx = slots.findIndex(s => s.id === id);
+  
+  if (idx === -1) return res.status(404).json({ message: 'Slot not found' });
+  if (!slots[idx].booked) return res.status(400).json({ message: 'Slot not booked' });
+  if (slots[idx].bookedBy !== req.user.sub) return res.status(403).json({ message: 'Not your booking' });
+  
+  slots[idx].booked = false;
+  delete slots[idx].bookedBy;
+  await writeJSON(DATA_FILE, slots);
+  res.json({ message: 'Booking cancelled', slot: slots[idx] });
 });
 
 const PORT = process.env.PORT || 4000;

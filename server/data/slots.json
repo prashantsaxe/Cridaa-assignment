@@ -4,7 +4,8 @@
     "date": "2025-08-30",
     "time": "06:00",
     "court": "Court 1",
-    "booked": false
+    "booked": true,
+    "bookedBy": "16f9ca2d-c753-4cd3-b46e-e1f30d3e6fb3"
   },
   {
     "id": "43f65933-1b97-4624-b618-f2e076b6061f",
@@ -19,7 +20,8 @@
     "date": "2025-08-30",
     "time": "08:00",
     "court": "Court 1",
-    "booked": false
+    "booked": true,
+    "bookedBy": "16f9ca2d-c753-4cd3-b46e-e1f30d3e6fb3"
   },
   {
     "id": "27ddacc5-5301-4a5e-bdcf-db49b1ee39fd",
@@ -42,7 +44,8 @@
     "date": "2025-08-30",
     "time": "16:00",
     "court": "Court 1",
-    "booked": false
+    "booked": true,
+    "bookedBy": "16f9ca2d-c753-4cd3-b46e-e1f30d3e6fb3"
   },
   {
     "id": "8cfab06b-1bd2-469e-946c-cac548728166",
@@ -57,7 +60,8 @@
     "date": "2025-08-30",
     "time": "18:00",
     "court": "Court 1",
-    "booked": false
+    "booked": true,
+    "bookedBy": "16f9ca2d-c753-4cd3-b46e-e1f30d3e6fb3"
   },
   {
     "id": "e97b3126-719f-40f8-9b92-8abd9ff46dd5",
@@ -72,6 +76,7 @@
     "date": "2025-08-30",
     "time": "20:00",
     "court": "Court 1",
-    "booked": false
+    "booked": true,
+    "bookedBy": "16f9ca2d-c753-4cd3-b46e-e1f30d3e6fb3"
   }
 ]

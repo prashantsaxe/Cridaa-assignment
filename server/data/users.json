@@ -3,5 +3,12 @@
     "id": "1b8809ad-beeb-4426-a3bd-8c339e239fb4",
     "username": "demo",
     "password": "demo"
+  },
+  {
+    "id": "16f9ca2d-c753-4cd3-b46e-e1f30d3e6fb3",
+    "username": "adsfad",
+    "password": "$2b$10$tMM4JI2sxWaN8Kcll0cB/uqLH5iEJhTgmEd.4gzOw9FBD6/Q/.cTa",
+    "email": "akashkareinght@ggmail.com",
+    "createdAt": "2025-08-30T10:50:32.150Z"
   }
 ]
